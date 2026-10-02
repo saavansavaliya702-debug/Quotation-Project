@@ -1,0 +1,103 @@
+/* ============================================
+   Products page
+   ============================================ */
+
+.products-container {
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 16px 20px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: "Helvetica", "Arial", sans-serif;
+  color: #1f2937;
+}
+
+.products-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #18304f;
+  margin: 0 0 16px;
+}
+
+.product-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.product-form input {
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  color: #1f2937;
+}
+
+.product-form input:focus {
+  border-color: #18304f;
+  box-shadow: 0 0 0 2px rgba(24, 48, 79, 0.1);
+}
+
+.product-form button {
+  background: #18304f;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.product-form button:hover {
+  background: #244a78;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #cbd5e1;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.product-table thead th {
+  background: #e0ebf7;
+  color: #18304f;
+  font-weight: 700;
+  text-align: center;
+}
+
+.product-table tbody tr:nth-child(even) td {
+  background: #f7f9fc;
+}
+
+.product-table .empty-row {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 16px 8px;
+}
+
+.delete-btn {
+  background: transparent;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.delete-btn:hover {
+  background: #fee2e2;
+}

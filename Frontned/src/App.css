@@ -1,0 +1,847 @@
+.app-shell {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 42px 24px 72px;
+  background:
+    radial-gradient(ellipse at 50% -18%, rgb(191 219 254 / 52%), transparent 48%),
+    linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
+  color: #1e293b;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pdf-toolbar {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  width: min(100%, 1020px);
+  margin: 0 auto 30px;
+  padding: 30px;
+  border: 1px solid rgb(148 163 184 / 18%);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 76% 0%, rgb(56 189 248 / 17%), transparent 38%),
+    linear-gradient(120deg, #10243d 0%, #172f50 58%, #1b3a5e 100%);
+  box-shadow: 0 20px 48px rgb(15 35 60 / 16%), 0 3px 10px rgb(15 35 60 / 8%);
+}
+
+.pdf-toolbar::after {
+  position: absolute;
+  z-index: -1;
+  top: -96px;
+  right: 27%;
+  width: 260px;
+  height: 260px;
+  border: 1px solid rgb(186 230 253 / 10%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 28px rgb(186 230 253 / 3%), 0 0 0 58px rgb(186 230 253 / 2%);
+  content: "";
+  pointer-events: none;
+}
+
+.toolbar-title {
+  min-width: 0;
+  max-width: 470px;
+}
+
+.toolbar-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: #a5dffb;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.toolbar-eyebrow::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 12px rgb(56 189 248 / 75%);
+  content: "";
+}
+
+.pdf-toolbar h1 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(27px, 3.3vw, 36px);
+  font-weight: 760;
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+}
+
+.pdf-toolbar p {
+  max-width: 390px;
+  margin: 11px 0 0;
+  color: #c0cede;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.pdf-toolbar-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.company-logo-upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgb(203 213 225 / 22%);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 8%);
+  color: #f1f5f9;
+  font-size: 12px;
+  font-weight: 650;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.company-logo-upload:hover {
+  border-color: rgb(186 230 253 / 42%);
+  background: rgb(255 255 255 / 12%);
+}
+
+.company-logo-label {
+  display: grid;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.company-logo-label small {
+  color: #aebed0;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.company-logo-upload input {
+  box-sizing: border-box;
+  max-width: 180px;
+  color: #c0cede;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.company-logo-upload input::file-selector-button {
+  margin-right: 8px;
+  padding: 7px 9px;
+  border: 1px solid rgb(203 213 225 / 32%);
+  border-radius: 6px;
+  background: rgb(255 255 255 / 12%);
+  color: #f8fafc;
+  font: inherit;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.company-logo-upload input::file-selector-button:hover {
+  border-color: #7dd3fc;
+  background: rgb(255 255 255 / 20%);
+}
+
+.company-logo-selection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 9px;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  background: #eff6ff;
+  max-width: 260px;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.company-logo-selection img {
+  width: 36px;
+  height: 30px;
+  object-fit: contain;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.company-logo-selection span {
+  overflow: hidden;
+  max-width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.company-logo-selection button {
+  padding: 4px 7px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  background: #fff;
+  color: #475569;
+  font: inherit;
+  cursor: pointer;
+}
+
+.company-logo-selection button:hover:not(:disabled) {
+  border-color: #fca5a5;
+  background: #fff1f2;
+  color: #b91c1c;
+}
+
+.btn-pdf-main {
+  flex: 0 0 auto;
+  min-height: 46px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  color: #082f49;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 7px 18px rgb(14 165 233 / 22%), inset 0 1px 0 rgb(255 255 255 / 36%);
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-pdf-main:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
+  box-shadow: 0 9px 22px rgb(14 165 233 / 30%), inset 0 1px 0 rgb(255 255 255 / 42%);
+  transform: translateY(-1px);
+}
+
+.btn-pdf-main:focus-visible,
+.btn-add:focus-visible,
+.btn-del:focus-visible {
+  outline: 3px solid rgb(59 130 246 / 35%);
+  outline-offset: 2px;
+}
+
+.btn-pdf-main:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.pdf-error {
+  box-sizing: border-box;
+  width: min(100%, 1020px);
+  margin: 0 auto 16px;
+  padding: 12px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.pdf-pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.pdf-page {
+  box-sizing: border-box;
+  width: min(100%, 794px);
+  min-height: 1123px;
+  padding: 38px 36px;
+  border: 1px solid #dce4ed;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 22px 54px rgb(15 35 60 / 11%), 0 3px 10px rgb(15 35 60 / 5%);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.pdf-page:not(.is-exporting):hover {
+  box-shadow: 0 26px 62px rgb(15 35 60 / 14%), 0 4px 12px rgb(15 35 60 / 6%);
+  transform: translateY(-2px);
+}
+
+.pdf-page > .quote-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pdf-page .quote-table {
+  width: 100%;
+  min-width: 0;
+  margin-top: 20px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pdf-page:not(.is-exporting) .quote-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #dbe2ea;
+  border-radius: 9px;
+  background: #fff;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+  scrollbar-width: thin;
+}
+
+.pdf-page:not(.is-exporting) .quote-table {
+  margin: 0;
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: #334155;
+}
+
+.pdf-page:not(.is-exporting) .quote-table th,
+.pdf-page:not(.is-exporting) .quote-table td {
+  border: 0;
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 10px;
+  vertical-align: middle;
+}
+
+.pdf-page:not(.is-exporting) .quote-table tr > :last-child {
+  border-right: 0;
+}
+
+.pdf-page:not(.is-exporting) .quote-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.pdf-page:not(.is-exporting) .quote-table .col-sr,
+.pdf-page:not(.is-exporting) .quote-table .col-tr,
+.pdf-page:not(.is-exporting) .quote-table .col-qty,
+.pdf-page:not(.is-exporting) .quote-table .col-annexure,
+.pdf-page:not(.is-exporting) .quote-table .col-action {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.pdf-page:not(.is-exporting) .quote-table .col-particular {
+  text-align: left;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.pdf-page:not(.is-exporting) .quote-table .col-rate,
+.pdf-page:not(.is-exporting) .quote-table .col-total {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pdf-page:not(.is-exporting) .quote-table .row-grand td,
+.pdf-page:not(.is-exporting) .quote-table .row-subtotal td,
+.pdf-page:not(.is-exporting) .quote-table .row-gst td {
+  border-top: 1px solid #dbe2ea;
+}
+
+.pdf-page:not(.is-exporting) .quote-table .text-right {
+  text-align: right;
+  font-weight: 700;
+}
+
+.pdf-page[aria-label="Annexure A-1"] .quote-table th:nth-child(1),
+.pdf-page[aria-label="Annexure A-1"] .quote-table td:nth-child(1) { width: 12%; }
+.pdf-page[aria-label="Annexure A-1"] .quote-table th:nth-child(2),
+.pdf-page[aria-label="Annexure A-1"] .quote-table td:nth-child(2) { width: 27%; }
+.pdf-page[aria-label="Annexure A-1"] .quote-table th:nth-child(3),
+.pdf-page[aria-label="Annexure A-1"] .quote-table td:nth-child(3) { width: 14%; }
+.pdf-page[aria-label="Annexure A-1"] .quote-table th:nth-child(4),
+.pdf-page[aria-label="Annexure A-1"] .quote-table td:nth-child(4) { width: 9%; }
+.pdf-page[aria-label="Annexure A-1"] .quote-table th:nth-child(5),
+.pdf-page[aria-label="Annexure A-1"] .quote-table td:nth-child(5) { width: 13%; }
+.pdf-page[aria-label="Annexure A-1"] .quote-table th:nth-child(6),
+.pdf-page[aria-label="Annexure A-1"] .quote-table td:nth-child(6) { width: 15%; }
+.pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table th:nth-child(7),
+.pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table td:nth-child(7) { width: 10%; }
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table th:nth-child(1),
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table td:nth-child(1) { width: 8%; }
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table th:nth-child(2),
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table td:nth-child(2) { width: 35%; }
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table th:nth-child(3),
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table td:nth-child(3) { width: 13%; }
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table th:nth-child(4),
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table td:nth-child(4) { width: 11%; }
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table th:nth-child(5),
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table td:nth-child(5) { width: 15%; }
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table th:nth-child(6),
+.pdf-page[aria-label="Annexure A-1"].is-exporting .quote-table td:nth-child(6) { width: 18%; }
+
+.pdf-page[aria-label="Annexure A-2"] .quote-table th:nth-child(1),
+.pdf-page[aria-label="Annexure A-2"] .quote-table td:nth-child(1),
+.pdf-page[aria-label="Annexure A-3"] .quote-table th:nth-child(1),
+.pdf-page[aria-label="Annexure A-3"] .quote-table td:nth-child(1) { width: 8%; }
+.pdf-page[aria-label="Annexure A-2"] .quote-table th:nth-child(2),
+.pdf-page[aria-label="Annexure A-2"] .quote-table td:nth-child(2),
+.pdf-page[aria-label="Annexure A-3"] .quote-table th:nth-child(2),
+.pdf-page[aria-label="Annexure A-3"] .quote-table td:nth-child(2) { width: 42%; }
+.pdf-page[aria-label="Annexure A-2"] .quote-table th:nth-child(3),
+.pdf-page[aria-label="Annexure A-2"] .quote-table td:nth-child(3),
+.pdf-page[aria-label="Annexure A-3"] .quote-table th:nth-child(3),
+.pdf-page[aria-label="Annexure A-3"] .quote-table td:nth-child(3) { width: 14%; }
+.pdf-page[aria-label="Annexure A-2"] .quote-table th:nth-child(4),
+.pdf-page[aria-label="Annexure A-2"] .quote-table td:nth-child(4),
+.pdf-page[aria-label="Annexure A-3"] .quote-table th:nth-child(4),
+.pdf-page[aria-label="Annexure A-3"] .quote-table td:nth-child(4) { width: 13%; }
+.pdf-page[aria-label="Annexure A-2"] .quote-table th:nth-child(5),
+.pdf-page[aria-label="Annexure A-2"] .quote-table td:nth-child(5),
+.pdf-page[aria-label="Annexure A-3"] .quote-table th:nth-child(5),
+.pdf-page[aria-label="Annexure A-3"] .quote-table td:nth-child(5) { width: 15%; }
+.pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table th:nth-child(6),
+.pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table td:nth-child(6),
+.pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table th:nth-child(6),
+.pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table td:nth-child(6) { width: 8%; }
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table th:nth-child(1),
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table td:nth-child(1),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table th:nth-child(1),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table td:nth-child(1) { width: 8%; }
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table th:nth-child(2),
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table td:nth-child(2),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table th:nth-child(2),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table td:nth-child(2) { width: 47%; }
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table th:nth-child(3),
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table td:nth-child(3),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table th:nth-child(3),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table td:nth-child(3) { width: 16%; }
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table th:nth-child(4),
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table td:nth-child(4),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table th:nth-child(4),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table td:nth-child(4) { width: 14%; }
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table th:nth-child(5),
+.pdf-page[aria-label="Annexure A-2"].is-exporting .quote-table td:nth-child(5),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table th:nth-child(5),
+.pdf-page[aria-label="Annexure A-3"].is-exporting .quote-table td:nth-child(5) { width: 15%; }
+
+.pdf-page[aria-label="Annexure A-4"] .quote-table th:nth-child(1),
+.pdf-page[aria-label="Annexure A-4"] .quote-table td:nth-child(1) { width: 18%; }
+.pdf-page[aria-label="Annexure A-4"] .quote-table th:nth-child(2),
+.pdf-page[aria-label="Annexure A-4"] .quote-table td:nth-child(2) { width: 57%; }
+.pdf-page[aria-label="Annexure A-4"] .quote-table th:nth-child(3),
+.pdf-page[aria-label="Annexure A-4"] .quote-table td:nth-child(3) { width: 25%; }
+
+.pdf-page .quote-header {
+  padding: 2px 0 8px;
+  border-bottom: 1px solid #e2e8f0;
+  background: transparent;
+  color: #172b45;
+  font-size: 20px;
+  font-weight: 750;
+  letter-spacing: 0.01em;
+}
+
+.pdf-page .quote-subheader {
+  padding: 10px 0 20px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.quote-subheader-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.quote-subheader-input:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.quote-subheader-input:focus {
+  border-color: #3b82f6;
+  outline: 3px solid rgb(59 130 246 / 13%);
+  background: #fff;
+}
+
+.pdf-page .quote-table th,
+.pdf-page .quote-table td {
+  padding: 11px 10px;
+  border: 1px solid #dbe2ea;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.pdf-page .quote-table thead th {
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 700;
+}
+
+.pdf-page .quote-table tbody tr:nth-child(even):not(.row-grand):not(.row-subtotal):not(.row-gst) td {
+  background: #fafcff;
+}
+
+.pdf-page .quote-table .empty-row {
+  padding: 24px 12px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.pdf-page .quote-table .row-subtotal td,
+.pdf-page .quote-table .row-gst td {
+  background: #f8fafc;
+  color: #334155;
+  font-size: 12px;
+}
+
+.pdf-page .quote-table .row-grand td {
+  background: #eaf2ff;
+  color: #172b45;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.quote-form {
+  display: grid;
+  grid-template-columns: minmax(200px, 2fr) repeat(3, minmax(95px, 1fr)) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  margin: 0 0 22px;
+  border: 1px solid #e1e8f0;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #f8fafc, #f4f7fb);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 90%);
+}
+
+.quote-form-a1 .form-particular,
+.quote-form-a1 .btn-add {
+  grid-column: auto;
+}
+
+.quote-form-a1 .btn-add {
+  justify-self: stretch;
+}
+
+.quote-form-units {
+  grid-template-columns: minmax(200px, 2fr) minmax(140px, 1fr) auto;
+}
+
+.quote-form-units .form-particular,
+.quote-form-units .summary-input {
+  grid-column: 1 / -1;
+}
+
+.quote-form-units .qty-group,
+.quote-form-units .btn-add {
+  grid-column: auto;
+}
+
+.quote-form-units .btn-add {
+  justify-self: stretch;
+}
+
+.quote-form .form-particular {
+  min-width: 0;
+  width: 100%;
+}
+
+.quote-form .summary-input {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.quote-form .qty-group {
+  min-width: 0;
+  width: 100%;
+}
+
+.quote-form .form-qty {
+  min-width: 0;
+  width: 50%;
+}
+
+.quote-form .form-unit {
+  min-width: 0;
+  width: 50%;
+}
+
+.quote-form .form-input,
+.quote-form .gst-input {
+  box-sizing: border-box;
+  min-height: 42px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #1e293b;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.quote-form .form-input:focus,
+.quote-form .gst-input:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 4px rgb(59 130 246 / 13%);
+}
+
+.quote-form .btn-add {
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgb(29 78 216 / 16%);
+  transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.quote-form .btn-add:hover {
+  background: #1e40af;
+  box-shadow: 0 5px 12px rgb(29 78 216 / 24%);
+  transform: translateY(-1px);
+}
+
+.quote-form .gst-label {
+  grid-column: 1 / -1;
+  color: #475569;
+}
+
+.quote-form .gst-input {
+  width: 82px;
+  padding: 8px;
+}
+
+.quote-page-title {
+  color: #172b45;
+}
+
+.pdf-page .btn-del {
+  border-color: #fecaca;
+  color: #dc2626;
+}
+
+.pdf-page .btn-del:hover {
+  border-color: #dc2626;
+  background: #dc2626;
+  color: #fff;
+}
+
+.pdf-page :focus-visible,
+.company-logo-selection button:focus-visible,
+.company-logo-upload input:focus-visible {
+  outline: 3px solid rgb(59 130 246 / 35%);
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 22px 12px 40px;
+  }
+
+  .pdf-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 22px;
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .toolbar-title {
+    max-width: 100%;
+  }
+
+  .pdf-toolbar::after {
+    right: 0;
+  }
+
+  .pdf-toolbar-actions {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .company-logo-upload {
+    flex-wrap: wrap;
+  }
+
+  .pdf-error {
+    width: 100%;
+  }
+
+  .pdf-page {
+    min-height: auto;
+    padding: 25px 17px;
+  }
+
+  .pdf-page .quote-table {
+    font-size: 11px;
+  }
+
+  .pdf-page .quote-table th,
+  .pdf-page .quote-table td {
+    padding: 8px 5px;
+    font-size: 10px;
+  }
+
+  .pdf-page:not(.is-exporting) .quote-table-container {
+    overflow-x: visible;
+  }
+
+  .pdf-page:not(.is-exporting) .quote-table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 10px;
+  }
+
+  .pdf-page:not(.is-exporting) .quote-table th,
+  .pdf-page:not(.is-exporting) .quote-table td {
+    padding: 8px 5px;
+    font-size: 10px;
+    overflow-wrap: anywhere;
+  }
+
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table th:nth-child(1),
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table td:nth-child(1) { width: 8%; }
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table th:nth-child(2),
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table td:nth-child(2) { width: 31%; }
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table th:nth-child(3),
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table td:nth-child(3) { width: 11%; }
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table th:nth-child(4),
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table td:nth-child(4) { width: 9%; }
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table th:nth-child(5),
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table td:nth-child(5) { width: 14%; }
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table th:nth-child(6),
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table td:nth-child(6) { width: 16%; }
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table th:nth-child(7),
+  .pdf-page[aria-label="Annexure A-1"]:not(.is-exporting) .quote-table td:nth-child(7) { width: 11%; }
+
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table th:nth-child(1),
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table td:nth-child(1),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table th:nth-child(1),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table td:nth-child(1) { width: 8%; }
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table th:nth-child(2),
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table td:nth-child(2),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table th:nth-child(2),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table td:nth-child(2) { width: 36%; }
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table th:nth-child(3),
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table td:nth-child(3),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table th:nth-child(3),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table td:nth-child(3) { width: 15%; }
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table th:nth-child(4),
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table td:nth-child(4),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table th:nth-child(4),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table td:nth-child(4) { width: 14%; }
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table th:nth-child(5),
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table td:nth-child(5),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table th:nth-child(5),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table td:nth-child(5) { width: 17%; }
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table th:nth-child(6),
+  .pdf-page[aria-label="Annexure A-2"]:not(.is-exporting) .quote-table td:nth-child(6),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table th:nth-child(6),
+  .pdf-page[aria-label="Annexure A-3"]:not(.is-exporting) .quote-table td:nth-child(6) { width: 10%; }
+
+  .pdf-page:not(.is-exporting) .quote-table .col-rate,
+  .pdf-page:not(.is-exporting) .quote-table .col-total {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .quote-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quote-form .form-particular,
+  .quote-form .summary-input,
+  .quote-form .gst-label {
+    grid-column: 1 / -1;
+  }
+
+  .quote-form-a1 .form-particular {
+    grid-column: 1 / -1;
+  }
+
+  .quote-form-units {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  }
+
+  .quote-form-units .qty-group {
+    grid-column: auto;
+  }
+
+  .quote-form .qty-group {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 420px) {
+  .pdf-toolbar-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .company-logo-upload {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .company-logo-upload input {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .btn-pdf-main {
+    width: 100%;
+  }
+
+  .pdf-page {
+    padding: 20px 11px;
+  }
+
+  .pdf-toolbar {
+    padding: 21px 18px;
+  }
+
+  .pdf-page .quote-table th,
+  .pdf-page .quote-table td {
+    padding: 7px 3px;
+    font-size: 9px;
+  }
+
+  .quote-form-a1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quote-form-a1 .form-particular,
+  .quote-form-a1 .summary-input,
+  .quote-form-a1 .gst-label {
+    grid-column: 1 / -1;
+  }
+
+  .quote-form-units {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  }
+
+  .quote-form-units .form-particular,
+  .quote-form-units .summary-input {
+    grid-column: 1 / -1;
+  }
+
+  .quote-form-units .qty-group {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,225 @@
+/* ============================================
+   Quotation Table (Annexure A-1)
+   ============================================ */
+
+.quote-wrapper {
+  background: #ffffff;
+  padding: 12px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: "Helvetica", "Arial", sans-serif;
+  color: #1f2937;
+  margin: 16px 0;
+}
+
+/* Header bar — grey pill */
+.quote-header {
+  background: #e0ebf7;
+  color: #18304f;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+/* Subtitle (editable in UI, plain text in export) */
+.quote-subheader {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.quote-subheader-input {
+  width: 100%;
+  max-width: 640px;
+  border: none;
+  border-bottom: 1px dashed #cbd5e1;
+  background: transparent;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f2937;
+  outline: none;
+  padding: 2px 4px;
+}
+
+.quote-subheader-input:focus {
+  border-bottom-color: #18304f;
+}
+
+/* ---- Form ---- */
+.quote-form {
+  display: grid;
+  grid-template-columns: 2fr 0.8fr 0.8fr 0.8fr auto auto 2fr;
+  gap: 8px;
+  align-items: center;
+  background: #f7f9fc;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #1f2937;
+  background: #ffffff;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  border-color: #18304f;
+  box-shadow: 0 0 0 2px rgba(24, 48, 79, 0.1);
+}
+
+.form-particular {
+  min-width: 0;
+}
+
+.summary-input {
+  grid-column: span 2;
+}
+
+.btn-add {
+  background: #18304f;
+  color: #ffffff;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background: #244a78;
+}
+
+.gst-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #18304f;
+}
+
+.gst-input {
+  width: 60px;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 12px;
+  outline: none;
+}
+
+/* ---- Table ---- */
+.quote-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: #1f2937;
+}
+
+.quote-table th,
+.quote-table td {
+  border: 1px solid #cbd5e1;
+  padding: 6px 8px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.quote-table thead th {
+  background: #e0ebf7;
+  color: #18304f;
+  font-weight: 700;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Zebra striping for body rows */
+.quote-table tbody tr:nth-child(even) td {
+  background: #f7f9fc;
+}
+
+/* Alignment helpers */
+.quote-table .col-sr,
+.quote-table .col-tr,
+.quote-table .col-qty,
+.quote-table .col-annexure {
+  text-align: center;
+}
+
+.quote-table .col-rate,
+.quote-table .col-total,
+.quote-table .text-right {
+  text-align: right;
+}
+
+.quote-table .col-total {
+  font-weight: 600;
+}
+
+/* Totals rows */
+.quote-table .row-subtotal td,
+.quote-table .row-gst td {
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+.quote-table .row-grand td {
+  background: #e8f0f8;
+  font-weight: 700;
+  color: #18304f;
+}
+
+/* Empty state */
+.empty-row {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 16px 8px;
+}
+
+/* Action column */
+.col-action {
+  width: 60px;
+  text-align: center;
+}
+
+.btn-del {
+  background: transparent;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.btn-del:hover {
+  background: #fee2e2;
+}
+
+/* ---- Print ---- */
+@media print {
+  .quote-form,
+  .col-action {
+    display: none !important;
+  }
+  .quote-wrapper {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}

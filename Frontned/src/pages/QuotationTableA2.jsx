@@ -13,6 +13,7 @@ const QuotationTableA2 = ({
   summary,
   onSummaryChange,
   exportMode = false,
+  annexureNumber = 2,
 }) => {
   const [items, setItems] = useState([]);
   const [form, setForm] = useState({
@@ -72,13 +73,13 @@ const QuotationTableA2 = ({
 
   return (
     <div className="quote-wrapper">
-      <div className="quote-header">Annexure A-2</div>
+      <div className="quote-header">Annexure A-{annexureNumber}</div>
       <div className="quote-subheader">
         {exportMode ? (
           subtitle
         ) : (
           <input
-            aria-label="Annexure A-2 subtitle"
+            aria-label={`Annexure A-${annexureNumber} subtitle`}
             className="quote-subheader-input"
             type="text"
             value={subtitle}
@@ -137,7 +138,7 @@ const QuotationTableA2 = ({
           <button type="submit" className="btn-add">+ Add</button>
           <input
             type="text"
-            aria-label="Annexure A-2 summary description"
+            aria-label={`Annexure A-${annexureNumber} summary description`}
             placeholder="Description shown in Annexure A-4"
             value={summary}
             onChange={(e) => onSummaryChange(e.target.value)}

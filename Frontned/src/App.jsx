@@ -8,7 +8,9 @@ import "./App.css";
 
 const App = () => {
   const pagesRef = useRef(null);
+  const nextAdditionalAnnexureId = useRef(1);
   const [totals, setTotals] = useState({ a1: 0, a2: 0, a3: 0 });
+  const [additionalAnnexures, setAdditionalAnnexures] = useState([]);
   const [summaries, setSummaries] = useState({
     a1: "BLUESTAR PACKAGE Air Conditioner Project 11 + 16.5 TR ( Double Circuit ) R- 410 GAS",
     a2: "27.5 TR AC LOW Side work",
@@ -94,6 +96,38 @@ const App = () => {
     (a3) => setTotals((current) => ({ ...current, a3 })),
     [],
   );
+  const updateAdditionalAnnexure = useCallback(
+    (id, field, value) =>
+      setAdditionalAnnexures((current) => {
+        const existing = current.find((annexure) => annexure.id === id);
+        if (!existing || existing[field] === value) return current;
+        return current.map((annexure) =>
+          annexure.id === id ? { ...annexure, [field]: value } : annexure,
+        );
+      }),
+    [],
+  );
+  const handleAddAnnexure = () => {
+    const currentAdditionalAnnexureCount = additionalAnnexures.length;
+    const id = nextAdditionalAnnexureId.current;
+    nextAdditionalAnnexureId.current += 1;
+    setAdditionalAnnexures((current) => [
+      ...current,
+      {
+        id,
+        total: 0,
+        summary: "Additional work",
+        subtitle: "Additional work",
+      },
+    ]);
+    setSubtitles((current) => {
+      const previousDefault = `(Grand Total of Annexure A-1 to A-${currentAdditionalAnnexureCount + 3} )`;
+      const nextDefault = `(Grand Total of Annexure A-1 to A-${currentAdditionalAnnexureCount + 4} )`;
+      return current.a4 === previousDefault
+        ? { ...current, a4: nextDefault }
+        : current;
+    });
+  };
   const updateA1Summary = useCallback(
     (a1) => setSummaries((current) => ({ ...current, a1 })),
     [],
@@ -181,6 +215,14 @@ const App = () => {
             </div>
           )}
           <button
+            className="btn-add-annexure"
+            type="button"
+            onClick={handleAddAnnexure}
+            disabled={isExporting}
+          >
+            + Add annexure table
+          </button>
+          <button
             className="btn-pdf-main"
             type="button"
             onClick={handleExport}
@@ -233,13 +275,40 @@ const App = () => {
             exportMode={isExporting}
           />
         </section>
+        {additionalAnnexures.map((annexure, index) => {
+          const annexureNumber = index + 4;
+          return (
+            <section
+              className={`pdf-page${isExporting ? " is-exporting" : ""}`}
+              aria-label={`Annexure A-${annexureNumber}`}
+              key={annexure.id}
+            >
+              <QuotationTableA2
+                annexureNumber={annexureNumber}
+                onTotalChange={(total) =>
+                  updateAdditionalAnnexure(annexure.id, "total", total)
+                }
+                subtitle={annexure.subtitle}
+                onSubtitleChange={(subtitle) =>
+                  updateAdditionalAnnexure(annexure.id, "subtitle", subtitle)
+                }
+                summary={annexure.summary}
+                onSummaryChange={(summary) =>
+                  updateAdditionalAnnexure(annexure.id, "summary", summary)
+                }
+                exportMode={isExporting}
+              />
+            </section>
+          );
+        })}
         <section
           className={`pdf-page${isExporting ? " is-exporting" : ""}`}
-          aria-label="Annexure A-4"
+          aria-label={`Annexure A-${additionalAnnexures.length + 4}`}
         >
           <QuotationTableA4
             totals={totals}
             summaries={summaries}
+            additionalAnnexures={additionalAnnexures}
             subtitle={subtitles.a4}
             onSubtitleChange={updateA4Subtitle}
             exportMode={isExporting}

@@ -4,10 +4,13 @@ import "../css/QuotationTableA4.css";
 const QuotationTableA4 = ({
   totals = { a1: 0, a2: 0, a3: 0 },
   summaries,
+  additionalAnnexures = [],
   subtitle = "Grand Total of Annexure A-1 to A-3",
   onSubtitleChange,
   exportMode = false,
 }) => {
+  const lastDetailAnnexureNumber = 3 + additionalAnnexures.length;
+  const totalAnnexureNumber = lastDetailAnnexureNumber + 1;
   const items = useMemo(
     () => [
       {
@@ -25,8 +28,13 @@ const QuotationTableA4 = ({
         particular: summaries.a3,
         total: totals.a3 || 0,
       },
+      ...additionalAnnexures.map((annexure, index) => ({
+        annexure: `A - ${index + 4}`,
+        particular: annexure.summary,
+        total: annexure.total || 0,
+      })),
     ],
-    [summaries, totals]
+    [additionalAnnexures, summaries, totals]
   );
 
   const grandTotal = useMemo(
@@ -39,13 +47,13 @@ const QuotationTableA4 = ({
 
   return (
     <div className="quote-wrapper">
-      <div className="quote-header">Annexure A- 4</div>
+      <div className="quote-header">Annexure A-{totalAnnexureNumber}</div>
       <div className="quote-subheader">
         {exportMode ? (
           subtitle
         ) : (
           <input
-            aria-label="Annexure A-4 subtitle"
+            aria-label={`Annexure A-${totalAnnexureNumber} subtitle`}
             className="quote-subheader-input"
             type="text"
             value={subtitle}

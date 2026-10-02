@@ -128,6 +128,19 @@ const App = () => {
         : current;
     });
   };
+  const handleRemoveAnnexure = () => {
+    if (additionalAnnexures.length === 0) return;
+
+    const currentAdditionalAnnexureCount = additionalAnnexures.length;
+    setAdditionalAnnexures((current) => current.slice(0, -1));
+    setSubtitles((current) => {
+      const previousDefault = `(Grand Total of Annexure A-1 to A-${currentAdditionalAnnexureCount + 3} )`;
+      const nextDefault = `(Grand Total of Annexure A-1 to A-${currentAdditionalAnnexureCount + 2} )`;
+      return current.a4 === previousDefault
+        ? { ...current, a4: nextDefault }
+        : current;
+    });
+  };
   const updateA1Summary = useCallback(
     (a1) => setSummaries((current) => ({ ...current, a1 })),
     [],
@@ -221,6 +234,14 @@ const App = () => {
             disabled={isExporting}
           >
             + Add annexure table
+          </button>
+          <button
+            className="btn-remove-annexure"
+            type="button"
+            onClick={handleRemoveAnnexure}
+            disabled={isExporting || additionalAnnexures.length === 0}
+          >
+            − Remove annexure table
           </button>
           <button
             className="btn-pdf-main"

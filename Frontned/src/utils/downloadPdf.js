@@ -14,12 +14,14 @@ const COLORS = {
 };
 const PAGE_MARGIN = 16;
 
-const getCellText = (cell) =>
-  (cell.innerText || cell.textContent || "")
+const getCellText = (cell, uppercase = false) => {
+  const text = (cell.innerText || cell.textContent || "")
     .split(/\r?\n/)
     .map((line) => line.replace(/\s+/g, " ").trim())
     .filter(Boolean)
     .join("\n");
+  return uppercase ? text.toUpperCase() : text;
+};
 
 const fitImageToBox = (imageWidth, imageHeight, boxWidth, boxHeight) => {
   const scale = Math.min(boxWidth / imageWidth, boxHeight / imageHeight);
@@ -37,7 +39,7 @@ const readTable = (table) => {
   const rows = Array.from(table.querySelectorAll("tbody tr")).map((row) => ({
     className: row.className,
     cells: Array.from(row.cells).map((cell) => ({
-      text: getCellText(cell),
+      text: getCellText(cell, true),
       span: cell.colSpan || 1,
       className: cell.className,
     })),

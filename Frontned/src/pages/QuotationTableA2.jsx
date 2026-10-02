@@ -2,8 +2,8 @@ import { useState, useMemo, useEffect } from "react";
 import "../css/QuotationTableA2.css";
 
 const UNITS = [
-  "pcs", "feet", "foot", "ton", "kg", "nos",
-  "meter", "sq.ft", "set", "lot", "approx",
+  "PCS", "FEET", "FOOT", "TON", "KG", "NOS",
+  "METER", "SQ.FT", "SET", "LOT", "APPROX",
 ];
 
 const QuotationTableA2 = ({
@@ -19,7 +19,7 @@ const QuotationTableA2 = ({
   const [form, setForm] = useState({
     particular: "",
     qty: "",
-    unit: "pcs",
+    unit: "PCS",
     rate: "",
   });
 
@@ -49,7 +49,7 @@ const QuotationTableA2 = ({
         rate: rateNum,
       },
     ]);
-    setForm({ particular: "", qty: "", unit: "pcs", rate: "" });
+    setForm({ particular: "", qty: "", unit: "PCS", rate: "" });
   };
 
   const handleDelete = (id) =>
@@ -174,7 +174,7 @@ const QuotationTableA2 = ({
                     <div key={i}>{line}</div>
                   ))}
                 </td>
-                <td className="col-qty">{row.qty} {row.unit}</td>
+                <td className="col-qty">{row.qty} {row.unit.toUpperCase()}</td>
                 <td className="col-rate">{format(row.rate)}</td>
                 <td className="col-total">{format(row.total)}</td>
                 {!exportMode && (

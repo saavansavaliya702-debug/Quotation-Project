@@ -228,6 +228,25 @@
   transition: background 150ms ease, border-color 150ms ease;
 }
 
+.btn-remove-annexure {
+  flex: 0 0 auto;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1px solid rgb(252 165 165 / 40%);
+  border-radius: 10px;
+  background: rgb(127 29 29 / 24%);
+  color: #fee2e2;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.btn-remove-annexure:hover:not(:disabled) {
+  border-color: #fca5a5;
+  background: rgb(127 29 29 / 42%);
+}
+
 .btn-add-annexure:hover:not(:disabled) {
   border-color: #7dd3fc;
   background: rgb(255 255 255 / 18%);
@@ -241,6 +260,7 @@
 
 .btn-pdf-main:focus-visible,
 .btn-add-annexure:focus-visible,
+.btn-remove-annexure:focus-visible,
 .btn-add:focus-visible,
 .btn-del:focus-visible {
   outline: 3px solid rgb(59 130 246 / 35%);
@@ -255,6 +275,11 @@
 .btn-add-annexure:disabled {
   cursor: wait;
   opacity: 0.7;
+}
+
+.btn-remove-annexure:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .pdf-error {
@@ -307,6 +332,10 @@
   min-width: 0;
   margin-top: 20px;
   table-layout: fixed;
+}
+
+.pdf-page .quote-table tbody {
+  text-transform: uppercase;
   border-collapse: collapse;
   border-radius: 8px;
   overflow: hidden;
@@ -834,6 +863,10 @@
   }
 
   .btn-add-annexure {
+    width: 100%;
+  }
+
+  .btn-remove-annexure {
     width: 100%;
   }
 

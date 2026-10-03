@@ -10,6 +10,8 @@ const COLORS = {
   border: [203, 213, 225],
   stripe: [247, 249, 252],
   highlight: [232, 240, 248],
+  headerPink: [240, 228, 236],
+  titleBlue: [200, 222, 246],
   white: [255, 255, 255],
 };
 const PAGE_MARGIN = 16;
@@ -189,9 +191,10 @@ const drawTableHeader = (pdf, headers, widths, x, y, rowHeight) => {
   let cellX = x;
   headers.forEach((_, index) => {
     const width = widths[index];
+    pdf.setFillColor(...COLORS.headerPink);
     pdf.setDrawColor(...COLORS.border);
     pdf.setLineWidth(0.25);
-    pdf.rect(cellX, y, width, rowHeight);
+    pdf.rect(cellX, y, width, rowHeight, "FD");
     cellX += width;
   });
 
@@ -371,10 +374,14 @@ const drawPageHeading = (
 };
 
 const drawSectionHeading = (pdf, title, subtitle, pageWidth, y) => {
+  const bandHeight = 8;
+  const bandWidth = pageWidth - PAGE_MARGIN * 2;
+  pdf.setFillColor(...COLORS.titleBlue);
+  pdf.rect(PAGE_MARGIN, y, bandWidth, bandHeight, "F");
   pdf.setTextColor(...COLORS.navy);
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(9.5);
-  pdf.text(title, pageWidth / 2, y + 4, { align: "center" });
+  pdf.text(title, pageWidth / 2, y + 5.4, { align: "center" });
   pdf.setTextColor(...COLORS.muted);
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(7.5);
@@ -382,7 +389,7 @@ const drawSectionHeading = (pdf, title, subtitle, pageWidth, y) => {
     subtitle,
     pageWidth - PAGE_MARGIN * 2,
   );
-  const subtitleY = y + 8;
+  const subtitleY = y + bandHeight + 4;
   pdf.text(subtitleLines, pageWidth / 2, subtitleY, { align: "center" });
   return subtitleY + subtitleLines.length * 3.5 + 2;
 };
@@ -433,7 +440,7 @@ export const downloadElementsAsPdf = async (
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(7.5);
     const lines = pdf.splitTextToSize(subtitle, contentWidth);
-    return 10 + lines.length * 3.5;
+    return 14 + lines.length * 3.5;
   };
   const newPage = () => {
     pdf.addPage("a4", "portrait");
@@ -488,7 +495,7 @@ export const downloadElementsAsPdf = async (
       drawSectionHeading(pdf, title, subtitle, pageWidth, startY);
     y = drawActiveSectionHeading(y);
 
-    if (y + 11 + 8 > pageBottom) {
+    if (y + getSectionHeadingHeight(subtitle) + 11 + 8 > pageBottom) {
       y = newPage();
       y = drawActiveSectionHeading(y);
     }
